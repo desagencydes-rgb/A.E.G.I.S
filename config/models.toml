@@ -1,0 +1,39 @@
+# Model Configuration for AEGIS Agents
+
+[orchestrator]
+normal_model = "hermes3:8b"
+monster_model = "hermes3:8b"
+context_window = 16384
+temperature = 0.7
+
+[tool_executor]
+model = "hermes3:8b"  # Same for both modes - needs tool calling
+context_window = 8192
+temperature = 0.3  # Lower temp for precise execution
+
+[researcher]
+model = "dolphin-mistral:latest"
+context_window = 16384
+temperature = 0.6
+
+[memory_manager]
+model = "phi3:latest"
+context_window = 4096
+temperature = 0.5
+concurrent_allowed = true  # Can run with orchestrator
+
+[coding_agent]
+model = "qwen2.5-coder:7b"
+context_window = 8192
+temperature = 0.4  # Lower for more deterministic code
+keep_alive = "24h"  # Keep model loaded for speed
+
+[security_agent]
+model = "deepseek-coder:6.7b"
+context_window = 16384
+temperature = 0.5  # Balance between creativity and precision
+reasoning_model = "hermes3:8b"  # For threat modeling and analysis
+
+[embedding]
+model = "nomic-embed-text"
+dimensions = 768

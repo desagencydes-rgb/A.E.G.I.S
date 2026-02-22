@@ -1,0 +1,40 @@
+version: 0.4.0
+
+# Simple test workflow: Research -> Code
+# Tests basic AEGIS agent integration with ChatDev
+
+graph:
+  id: aegis_simple_test
+  description: Basic test of AEGIS agents in ChatDev workflow
+  log_level: INFO
+  
+  initial_instruction: |
+    This workflow uses AEGIS agents to research a topic and then generate code.
+    Enter your request (e.g., "Research Python async best practices and create example code")
+  
+  start:
+    - Research Phase
+  
+  end:
+    - Implementation Phase
+  
+  nodes:
+    - id: Research Phase
+      type: aegis_agent
+      config:
+        aegis_agent: researcher
+        permission_mode: safe
+        protocol_666: false
+        description: "AEGIS Research Agent - gathers information on the topic"
+    
+    - id: Implementation Phase
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky  # Can write files
+        protocol_666: false
+        description: "AEGIS Coding Agent - implements based on research"
+  
+  edges:
+    - from: Research Phase
+      to: Implementation Phase

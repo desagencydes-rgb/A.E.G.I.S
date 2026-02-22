@@ -1,0 +1,70 @@
+version: 0.4.0
+
+# Template: Security Audit Workflow
+# Use for: Security review, vulnerability scanning, penetration testing
+
+graph:
+  id: template_security_audit
+  description: Comprehensive security audit with Protocol 666
+  log_level: INFO
+  
+  initial_instruction: |
+    Enter the codebase or system to audit.
+    This workflow uses Protocol 666 for aggressive vulnerability detection.
+  
+  start:
+    - Code Scanner
+  
+  end:
+    - Human Review
+  
+  nodes:
+    - id: Code Scanner
+      type: aegis_agent
+      config:
+        aegis_agent: code_explorer
+        permission_mode: safe
+        protocol_666: false
+        description: Scans codebase structure and identifies components
+    
+    - id: Vulnerability Hunter
+      type: aegis_agent
+      config:
+        aegis_agent: security
+        permission_mode: safe
+        protocol_666: true  # UNLEASHED for thorough detection
+        description: Aggressively searches for security vulnerabilities
+    
+    - id: Risk Analyzer
+      type: aegis_agent
+      config:
+        aegis_agent: code_architect
+        permission_mode: safe
+        protocol_666: false
+        description: Assesses risk levels and prioritizes findings
+    
+    - id: Report Writer
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky
+        protocol_666: false
+        description: Generates detailed security audit report
+    
+    - id: Human Review
+      type: human
+      config:
+        description: Review security findings and approve remediation plan
+  
+  edges:
+    - from: Code Scanner
+      to: Vulnerability Hunter
+    
+    - from: Vulnerability Hunter
+      to: Risk Analyzer
+    
+    - from: Risk Analyzer
+      to: Report Writer
+    
+    - from: Report Writer
+      to: Human Review

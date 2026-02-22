@@ -1,0 +1,136 @@
+version: 0.4.0
+
+# AEGIS Software Company Workflow
+# Full multi-agent development pipeline demonstrating a "company of agents"
+
+graph:
+  id: aegis_software_company
+  description: Complete software development workflow using AEGIS specialized agents
+  log_level: INFO
+  
+  initial_instruction: |
+    Welcome to the AEGIS Software Company!
+    
+    This workflow coordinates multiple specialized AEGIS agents to complete
+    full software development projects from requirements to deployment.
+    
+    Enter your project request (e.g., "Create a REST API for task management")
+  
+  start:
+    - Requirements Analyst
+  
+  end:
+    - Human Manager
+  
+  nodes:
+    # Phase 1: Requirements Analysis
+    - id: Requirements Analyst
+      type: aegis_agent
+      config:
+        aegis_agent: researcher
+        permission_mode: safe
+        protocol_666: false
+        description: |
+          Researches requirements, best practices, and similar implementations.
+          Produces detailed requirements document.
+    
+    # Phase 2: Architecture Design
+    - id: System Architect
+      type: aegis_agent
+      config:
+        aegis_agent: code_architect
+        permission_mode: safe
+        protocol_666: false
+        description: |
+          Designs system architecture based on requirements.
+          Creates component breakdown and technical specifications.
+    
+    # Phase 3: Implementation
+    - id: Senior Developer
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky  # Can write files
+        protocol_666: false
+        description: |
+          Implements the system based on architecture.
+          Writes production-ready code with error handling.
+    
+    # Phase 4: Security Audit
+    - id: Security Auditor
+      type: aegis_agent
+      config:
+        aegis_agent: security
+        permission_mode: safe
+        protocol_666: true  # UNLEASHED for finding vulnerabilities
+        description: |
+          Performs comprehensive security audit.
+          Uses Protocol 666 (monster mode) for thorough vulnerability detection.
+    
+    # Phase 5: Code Review
+    - id: Code Reviewer
+      type: aegis_agent
+      config:
+        aegis_agent: reviewer
+        permission_mode: safe
+        protocol_666: false
+        description: |
+          Reviews code quality, patterns, and maintainability.
+          Suggests improvements and refactoring.
+    
+    # Phase 6: Testing
+    - id: QA Engineer
+      type: aegis_agent
+      config:
+        aegis_agent: tool_executor
+        permission_mode: safe  # Read-only for testing
+        protocol_666: false
+        description: |
+          Executes test suite and validates functionality.
+          Reports any failing tests or issues.
+    
+    # Phase 7: Human Oversight
+    - id: Human Manager
+      type: human
+      config:
+        description: |
+          Review the complete work product:
+          - Requirements analysis
+          - Architecture design
+          - Implementation code
+          - Security audit report
+          - Code review feedback
+          - Test results
+          
+          Type "APPROVED" to mark as complete,
+          or provide feedback for the team to address.
+  
+  edges:
+    # Sequential flow
+    - from: Requirements Analyst
+      to: System Architect
+    
+    - from: System Architect
+      to: Senior Developer
+    
+    - from: Senior Developer
+      to: Security Auditor
+    
+    - from: Security Auditor
+      to: Code Reviewer
+    
+    - from: Code Reviewer
+      to: QA Engineer
+    
+    - from: QA Engineer
+      to: Human Manager
+    
+    # Loop back if not approved
+    - from: Human Manager
+      to: Senior Developer
+      condition:
+        type: keyword
+        config:
+          none:
+            - "APPROVED"
+          case_sensitive: false

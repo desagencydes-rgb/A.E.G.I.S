@@ -1,0 +1,82 @@
+version: 0.4.0
+
+# Template: Code Refactoring Workflow
+# Use for: Code cleanup, architecture improvements, technical debt reduction
+
+graph:
+  id: template_code_refactoring
+  description: Systematic code refactoring with review cycles
+  log_level: INFO
+  
+  initial_instruction: |
+    Specify the code to refactor and the improvement goals.
+    This workflow ensures quality through multiple review stages.
+  
+  start:
+    - Code Analyzer
+  
+  end:
+    - Final Approval
+  
+  nodes:
+    - id: Code Analyzer
+      type: aegis_agent
+      config:
+        aegis_agent: code_explorer
+        permission_mode: safe
+        protocol_666: false
+        description: Analyzes current codebase and identifies improvement opportunities
+    
+    - id: Architect
+      type: aegis_agent
+      config:
+        aegis_agent: code_architect
+        permission_mode: safe
+        protocol_666: false
+        description: Designs refactoring approach and new architecture
+    
+    - id: Implementer
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky
+        protocol_666: false
+        description: Implements refactoring changes
+    
+    - id: Reviewer
+      type: aegis_agent
+      config:
+        aegis_agent: reviewer
+        permission_mode: safe
+        protocol_666: false
+        description: Reviews refactored code for quality and correctness
+    
+    - id: Final Approval
+      type: human
+      config:
+        description: |
+          Review refactoring results.
+          Type APPROVED to accept, or provide feedback for another iteration.
+  
+  edges:
+    - from: Code Analyzer
+      to: Architect
+    
+    - from: Architect
+      to: Implementer
+    
+    - from: Implementer
+      to: Reviewer
+    
+    - from: Reviewer
+      to: Final Approval
+    
+    # Loop back if not approved
+    - from: Final Approval
+      to: Implementer
+      condition:
+        type: keyword
+        config:
+          none:
+            - "APPROVED"
+          case_sensitive: false

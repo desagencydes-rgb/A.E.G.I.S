@@ -1,0 +1,51 @@
+version: 0.4.0
+
+# Template: Research & Analysis Workflow
+# Use for: Data analysis, market research, technical investigation
+
+graph:
+  id: template_research_analysis
+  description: Research and analyze a topic with comprehensive reporting
+  log_level: INFO
+  
+  initial_instruction: |
+    This workflow performs deep research and analysis.
+    Enter your research question or topic.
+  
+  start:
+    - Primary Researcher
+  
+  end:
+    - Report Generator
+  
+  nodes:
+    - id: Primary Researcher
+      type: aegis_agent
+      config:
+        aegis_agent: researcher
+        permission_mode: safe
+        protocol_666: false
+        description: Conducts primary research on the topic
+    
+    - id: Analysis Agent
+      type: aegis_agent
+      config:
+        aegis_agent: code_architect
+        permission_mode: safe
+        protocol_666: false
+        description: Analyzes research findings and identifies patterns
+    
+    - id: Report Generator
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky
+        protocol_666: false
+        description: Generates comprehensive report with findings
+  
+  edges:
+    - from: Primary Researcher
+      to: Analysis Agent
+    
+    - from: Analysis Agent
+      to: Report Generator

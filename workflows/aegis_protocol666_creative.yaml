@@ -1,0 +1,64 @@
+version: 0.4.0
+
+# Protocol 666 Creative Workflow
+# Demonstrates selective use of monster mode for creativity
+
+graph:
+  id: aegis_protocol666_creative
+  description: Creative brainstorming with Protocol 666, refined by normal-mode agents
+  log_level: INFO
+  
+  initial_instruction: |
+    This workflow uses Protocol 666 (monster mode) strategically:
+    - Brainstorm agent: UNLEASHED for wild creativity
+    - Filter agent: NORMAL mode for professional refinement
+    - Implementation: NORMAL mode for production code
+    
+    Enter your creative project (e.g., "Design a dark-themed cyberpunk UI")
+  
+ start:
+    - Creative Brainstorm
+  
+  end:
+    - Implementation
+  
+  nodes:
+    # Phase 1: Unleashed Creativity
+    - id: Creative Brainstorm
+      type: aegis_agent
+      config:
+        aegis_agent: researcher
+        permission_mode: safe
+        protocol_666: true  # MONSTER MODE ACTIVATED
+        description: |
+          Brainstorms wild, unconventional ideas without filters.
+          Protocol 666 enabled for maximum creativity.
+    
+    # Phase 2: Professional Filter
+    - id: Professional Filter
+      type: aegis_agent
+      config:
+        aegis_agent: code_architect
+        permission_mode: safe
+        protocol_666: false  # Normal mode
+        description: |
+          Filters and refines creative ideas into production-ready concepts.
+          Maintains professional standards while preserving innovation.
+    
+    # Phase 3: Implementation
+    - id: Implementation
+      type: aegis_agent
+      config:
+        aegis_agent: coding
+        permission_mode: risky
+        protocol_666: false  # Normal mode for production
+        description: |
+          Implements the refined design with clean, maintainable code.
+          Produces professional-grade output.
+  
+  edges:
+    - from: Creative Brainstorm
+      to: Professional Filter
+    
+    - from: Professional Filter
+      to: Implementation
