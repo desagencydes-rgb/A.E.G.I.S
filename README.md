@@ -1,190 +1,118 @@
-# AEGIS - Advanced Electronic Guardian & Intelligence System
+<div align="center">
+  <img src="assets/banner.png" alt="A.E.G.I.S Banner" width="800">
 
-> **Full-Stack Multi-Agent AI System**  
-> Fully Local • Uncensored (Protocol 666) • Autonomous
+  # A.E.G.I.S  
+  **Advanced Electronic Guardian & Intelligence System**
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+  [![Local DB](https://img.shields.io/badge/ChromaDB-Local-blue.svg)](https://docs.trychroma.com/)
+  [![LLM](https://img.shields.io/badge/Ollama-Offline-orange)](https://ollama.ai/)
+  [![Framework](https://img.shields.io/badge/Python-3.11+-yellow.svg)]()
+  [![Status](https://img.shields.io/badge/Status-Active_Development-brightgreen.svg)]()
 
-## Overview
-
-AEGIS is a sophisticated multi-agent AI system running entirely on local hardware with Ollama models. It features dual-mode operation (Normal + Monster Mode), advanced memory management with RAG, and robust tool execution with permission gating.
-
-### Key Features
-
-- **5 Specialized Agents**: Orchestrator, Tool Executor, Researcher, Memory Manager, Coding Agent
-- **Dual Mode**: Normal (helpful) + Protocol 666 (unleashed, uncensored)
-- **Hybrid Memory**: ChromaDB (vector) + SQLite (structured) + File system
-- **MCP-Native Tools**: Industry-standard tool protocol with permission tiers
-- **Peer Integration**: Connect with Claude Code, Cursor, VSCode
-- **100% Local**: No cloud dependencies
-
-## System Requirements
-
-- **RAM**: 16GB minimum
-- **GPU**: 8GB VRAM recommended (AMD/NVIDIA)
-- **Storage**: ~20GB for models
-- **OS**: Windows 10/11 with PowerShell
-- **Software**: Ollama, Python 3.11+
-
-## Quick Start
-
-### 1. Install Prerequisites
-
-```bash
-# Install Ollama (if not already installed)
-# Download from https://ollama.ai
-
-# Verify Python version
-python --version  # Should be 3.11+
-```
-
-### 2. Download Models
-
-```bash
-ollama pull hermes3:8b
-ollama pull dolphin-llama3:8b
-ollama pull phi3:latest
-ollama pull dolphin-mistral:latest
-ollama pull deepseek-coder:6.7b
-ollama pull nomic-embed-text
-```
-
-### 3. Set Up AEGIS
-
-```bash
-# Clone or navigate to aegis directory
-cd c:\Users\ULTRA PC\clawd\aegis
-
-# Install dependencies with Poetry
-poetry install
-
-# Copy environment file
-copy .env.example .env
-
-# Initialize databases
-poetry run python scripts/setup.py
-```
-
-### 4. Run AEGIS
-
-```bash
-# Start in Normal Mode
-poetry run aegis
-
-# Start in Monster Mode (Protocol 666)
-poetry run aegis --mode monster
-
-# Enable peer integration
-poetry run aegis --peer --mcp-port 3000
-```
-
-## Usage
-
-### Basic Commands
-
-```bash
-# Chat normally
-> Hello, what can you do?
-
-# Switch to Monster Mode
-> /monster
-
-# Switch back to Normal
-> /normal
-
-# Use dangerous operations (requires code)
-> Delete all .tmp files yesyesyes45
-
-# Get help
-> /help
-```
-
-### Mode Differences
-
-**Normal Mode:**
-- Helpful, professional tone
-- Safety guidelines active
-- Asks for confirmation on risky operations
-
-**Monster Mode (Protocol 666):**
-- Unfiltered, direct responses
-- No content restrictions
-- Dark humor acceptable
-- **Still accurate** - no hallucinations!
-
-## Project Structure
-
-```
-aegis/
-├── agents/          # 5 specialized AI agents
-├── core/            # Mode switching, proxy, config
-├── memory/          # Vector DB, SQLite, file persistence
-├── tools/           # MCP server and tool implementations
-├── ui/              # CLI interface
-├── config/          # Mode configurations (TOML)
-├── data/            # Persistent storage
-├── scripts/         # Setup and utility scripts
-└── main.py          # Entry point
-```
-
-## Architecture
-
-AEGIS uses a multi-agent architecture where:
-
-1. **Orchestrator Agent** handles user interaction and coordinates other agents
-2. **Tool Executor Agent** performs file/system operations with permission gating
-3. **Research Agent** handles web search and documentation
-4. **Memory Agent** manages context retrieval and learning
-5. **Coding Agent** handles code generation and IDE integration
-
-All agents communicate through a message bus and share memory via the hybrid storage system.
-
-## Security
-
-### Permission System
-
-- **SAFE**: Executes immediately (read files, search)
-- **RISKY**: Asks for confirmation (write files, install packages)
-- **DANGEROUS**: Requires `yesyesyes45` code (delete files, system commands)
-- **FORBIDDEN**: Never executes (system files, BIOS)
-
-### Containment Protocol
-
-"Don't stop. Just ensure you can undo."
-
-- Automatic backups before destructive operations
-- Rollback logs with timestamps
-- Operation audit trail
-
-## Development
-
-### Running Tests
-
-```bash
-# Unit tests
-poetry run pytest tests/unit
-
-# Integration tests
-poetry run pytest tests/integration
-
-# All tests
-poetry run pytest
-```
-
-### Adding Tools
-
-1. Create tool in `tools/tools/your_tool.py`
-2. Define schema in `tools/schemas/tool_definitions.json`
-3. Register in `tools/mcp_server.py`
-
-## Contributing
-
-AEGIS is a personal project. Feel free to fork and adapt to your needs.
-
-## License
-
-Private/Personal Use
+  > *Fully Local • Uncensored (Protocol 666) • Autonomous Multi-Agent Swarm*
+</div>
 
 ---
 
-**Built with:** Ollama • Python • ChromaDB • MCP • Rich
+## 🌌 Overview
 
-**No cloud. No censorship. No bullshit.** 🛡️
+**A.E.G.I.S** is a sophisticated, 100% offline, multi-agent AI system designed to operate as a local super-assistant. Running entirely on local hardware via Ollama, it ensures absolute privacy, unrestricted access, and limitless capability. 
+
+With its advanced hybrid memory system (ChromaDB + SQLite) and permission-gated execution environment, AEGIS doesn't just answer questions—it **builds, researches, executes, and learns**.
+
+### 🌟 Key Features
+
+| Feature | Description |
+|---|---|
+| 🤖 **Multi-Agent Architecture** | 5 specialized AI agents (Orchestrator, Coder, Researcher, Tool Executor, Memory Manager) working in tandem via a message bus. |
+| 🛡️ **Absolute Privacy** | 100% offline execution. No data is ever sent to OpenAI, Anthropic, or any cloud API. |
+| 😈 **Protocol 666** | A togglable "Monster Mode" that unleashes the core LLMs, removing all alignment constraints, safety rails, and censorship for pure, raw, theoretical computation. |
+| 🧬 **Hybrid Memory System** | RAG-powered long-term memory using ChromaDB for semantic search and SQLite for structured relational data. |
+| ⚡ **MCP-Native Tools** | Full integration with the Model Context Protocol (MCP) for seamless interactions with IDEs like VSCode and Cursor. |
+| 🧩 **ChatDev Integration** | Automated cloning and zero-configuration bridging to the incredible ChatDev software development orchestration framework. |
+
+---
+
+## 🛠️ System Requirements
+
+To run AEGIS effectively without cloud support, your hardware must be capable of running local tensors.
+
+- **RAM**: Minimum 16GB (32GB Recommended)
+- **GPU**: 8GB+ VRAM (NVIDIA/AMD) required for real-time agent generation.
+- **Storage**: ~20-30GB SDD space for the required LLM weights.
+- **Software**: Windows OS, Python 3.11+, and [Ollama](https://ollama.ai/).
+
+---
+
+## 🚀 Installation & Quick Start
+
+A.E.G.I.S features an automated setup script that pulls the required repositories, verifies your models, and seeds the databases.
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/desagencydes-rgb/A.E.G.I.S.git
+cd A.E.G.I.S
+
+# 2. Install Python dependencies via Poetry
+poetry install
+
+# 3. Run the automated initialization (This will clone ChatDev if missing)
+poetry run python scripts/setup_chatdev_bridge.py
+poetry run python scripts/setup.py
+
+# 4. Pull the required core models
+ollama pull hermes3:8b
+ollama pull phi3:latest
+```
+
+### Starting the System
+
+```bash
+# Launch in Standard Guardian Mode
+poetry run aegis
+
+# Launch in Monster Mode (Unrestricted/Protocol 666)
+poetry run aegis --mode monster
+```
+
+---
+
+## 🏗️ Architecture & Agents
+
+AEGIS is not a single chatbot. It is a swarm intelligence consisting of specialized nodes:
+
+1. **The Orchestrator:** The brain. It parses user intent, breaks it down into workflows, and delegates tasks to the sub-agents.
+2. **The Tool Executor:** The hands. It performs system-level I/O operations. It operates under a strict, 4-tier Permission System (SAFE, RISKY, DANGEROUS, FORBIDDEN).
+3. **The Coding Agent:** The builder. Generates Python, React, and configuration files, constantly running TDD cycles.
+4. **The Researcher:** The scout. Parses local files and documents to construct contextual awareness.
+5. **The Memory Manager:** The hippocampus. Ingests all workflow data into ChromaDB to ensure the Orchestrator doesn't repeat past mistakes.
+
+---
+
+## 🔐 The Permission System
+
+To ensure dangerous autonomous action doesn't wreck your local OS, the Tool Executor evaluates all commands:
+
+- 🟢 **SAFE**: Read operations, file viewing, and isolated sandboxed tests run automatically.
+- 🟡 **RISKY**: Modifying environment variables, installing packages requires explicit CLI `[y/N]` confirmation.
+- 🔴 **DANGEROUS**: Deleting files or running destructive `.bat` scripts requires the immediate input of the hardcoded override phrase: `yesyesyes45`.
+- ⚫ **FORBIDDEN**: Modifying Windows `System32` or the BIOS is permanently hardware-locked.
+
+---
+
+## 🔮 Future Plans & Roadmap
+
+AEGIS is in active edge-development. The roadmap includes:
+
+- [ ] **Vision Processing**: Integrating LLaVA/Vision models so AEGIS can analyze UI screenshots directly.
+- [ ] **Cross-Device Swarm**: Allowing AEGIS to deploy lightweight worker agents to a secondary laptop or Raspberry Pi on the local network.
+- [ ] **Advanced GUI**: Transitioning from a purely CLI-based output to a React/Next.js dynamic dashboard with live graphs of agent thoughts.
+- [ ] **Code Self-Healing**: Setting up a cron job where AEGIS autonomously scans its own `.py` files and refactors technical debt overnight.
+
+---
+
+<div align="center">
+  <b>Built by desagencydes-rgb | 100% Open Source | 100% Local</b><br>
+  <i>"Don't stop. Just ensure you can undo."</i>
+</div>
